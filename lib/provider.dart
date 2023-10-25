@@ -78,8 +78,8 @@ class ColorProvider with ChangeNotifier {
     loadCurrentColor();
     notifyListeners();
   }
-   void changeColor(Color color) {
-    pickerColor = color;
-    notifyListeners();
-  }
+  //  void changeColor(Color color) {
+  //   pickerColor = color;
+  //   notifyListeners();
+  // }
 }
