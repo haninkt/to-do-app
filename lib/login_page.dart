@@ -16,7 +16,7 @@ List<String> passcodelist = [];
 
 final TextEditingController username = TextEditingController();
 final password = TextEditingController();
-String name = 'hanin';
+String name = 'Hanin';
 String pass = 'hanintdg';
 
 class LoginPageState extends State<LoginPage> {
