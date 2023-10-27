@@ -17,7 +17,6 @@ Future<dynamic> ShowModalBottomSheet(BuildContext context) {
         return SizedBox(
           height: MediaQuery.of(context).size.height *
               0.90, // 3/4 of the screen height
-
           child: Column(
             children: [
               Row(

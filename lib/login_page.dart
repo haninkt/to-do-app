@@ -226,7 +226,9 @@ class LoginPageState extends State<LoginPage> {
                                   style: TextStyle(
                                       fontSize: 15, color: Colors.blue),
                                 ),
-                                onPressed: () {Navigator.of(context).push(MaterialPageRoute(builder: (context) => SignUpPage()));
+                                onPressed: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) => SignUpPage()));
                                   //signup screen
                                 },
                                 style: ButtonStyle(

@@ -183,15 +183,14 @@ class _MyIconsssState extends State<MyIconsss> {
   Widget build(BuildContext context) {
     icon.loadCurrentColor();
     return Consumer<ColorProvider>(builder: (context, value, child) {
-      
-   return Container(
+      return Container(
         height: 22,
         width: 22,
-        decoration: BoxDecoration(color:Colors.lightGreen),
+        decoration: BoxDecoration(color: Colors.lightGreen),
         alignment: Alignment.center,
-        child: Text('0' ),
-      );}
-    );
+        child: Text('0'),
+      );
+    });
   }
 }
 
@@ -228,17 +227,17 @@ class MyIconsState extends State<MyIcons> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onLongPress: () {Coloralert(context);
-       
+      onLongPress: () {
+        Coloralert(context);
       },
       child: Container(
         height: 50,
         width: 50,
         decoration: BoxDecoration(
-          color: currentColor,
-          image: DecorationImage(
-              image: AssetImage('assets/fa_paint-brush.png')),
-          borderRadius: BorderRadius.all(Radius.circular(5))),
+            color: currentColor,
+            image:
+                DecorationImage(image: AssetImage('assets/fa_paint-brush.png')),
+            borderRadius: BorderRadius.all(Radius.circular(5))),
       ),
     );
   }
@@ -261,9 +260,9 @@ class MyIconsState extends State<MyIcons> {
           ElevatedButton(
             child: const Text('Got it'),
             onPressed: () {
-               Navigator.of(context).pop();
-                  setState(() => currentColor = pickerColor);
-                  _saveCurrentColor();
+              Navigator.of(context).pop();
+              setState(() => currentColor = pickerColor);
+              _saveCurrentColor();
             },
           ),
         ],

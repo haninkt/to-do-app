@@ -83,8 +83,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                 focusedBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10),
                                     borderSide: const BorderSide(
-                                      color: Color.fromARGB(
-                                          255, 255, 255, 255),
+                                      color: Color.fromARGB(255, 255, 255, 255),
                                     )),
                                 prefixIcon: const Icon(
                                   Icons.person,
@@ -112,8 +111,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                 focusedBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10),
                                     borderSide: const BorderSide(
-                                      color: Color.fromARGB(
-                                          255, 255, 255, 255),
+                                      color: Color.fromARGB(255, 255, 255, 255),
                                     )),
                                 prefixIcon: const Icon(
                                   Icons.person,
@@ -142,8 +140,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                 focusedBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10),
                                     borderSide: const BorderSide(
-                                      color: Color.fromARGB(
-                                          255, 255, 255, 255),
+                                      color: Color.fromARGB(255, 255, 255, 255),
                                     )),
                                 suffixIcon: IconButton(
                                   icon: Icon(
@@ -185,8 +182,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                 focusedBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10),
                                     borderSide: const BorderSide(
-                                      color: Color.fromARGB(
-                                          255, 255, 255, 255),
+                                      color: Color.fromARGB(255, 255, 255, 255),
                                     )),
                                 suffixIcon: IconButton(
                                   icon: Icon(
@@ -240,7 +236,8 @@ class _SignUpPageState extends State<SignUpPage> {
                                       fontSize: 15, color: Colors.blue),
                                 ),
                                 onPressed: () {
-                                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => LoginPage()));
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) => LoginPage()));
                                 },
                                 style: const ButtonStyle(
                                   splashFactory: NoSplash.splashFactory,

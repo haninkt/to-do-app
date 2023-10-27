@@ -27,7 +27,7 @@ class providerd with ChangeNotifier {
   }
 
   addTask(String task) {
-    tasks.add(task); 
+    tasks.add(task);
     saveTasks();
     //taskname.clear();
     notifyListeners();
@@ -44,7 +44,6 @@ class providerd with ChangeNotifier {
     notifyListeners();
   }
 
-
   Future<void> SaveData() async {
     final prefs = await SharedPreferences.getInstance();
     prefs.setStringList('username_value', usernamelist);
@@ -59,24 +58,24 @@ class providerd with ChangeNotifier {
 }
 
 class ColorProvider with ChangeNotifier {
-
-    Color currentColor = const Color(0xff443a49);
-     Color pickerColor = const Color(0xff443a49);
+  Color currentColor = const Color(0xff443a49);
+  Color pickerColor = const Color(0xff443a49);
 
   void saveCurrentColor() async {
     final prefs = await SharedPreferences.getInstance();
     prefs.setInt('currentColor', currentColor.value);
     notifyListeners();
   }
-  
+
   void loadCurrentColor() async {
     final prefs = await SharedPreferences.getInstance();
     final savedColor = prefs.getInt('currentColor');
     if (savedColor != null) {
-        currentColor = Color(savedColor);
+      currentColor = Color(savedColor);
     }
   }
-  ColorProvider(){
+
+  ColorProvider() {
     loadCurrentColor();
     notifyListeners();
   }
