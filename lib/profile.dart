@@ -2,6 +2,7 @@
 
 import 'package:design/login_page.dart';
 import 'package:design/provider.dart';
+import 'package:design/signin.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -36,7 +37,7 @@ class ProfilePageState extends State<ProfilePage> {
           title: Text('Profile'),
         ),
         body: Center(
-          child: Column(
+          child: Column(mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Stack(
                 children: [
@@ -164,11 +165,15 @@ class ProfilePageState extends State<ProfilePage> {
                         SizedBox(
                           width: 80,
                         ),
-                        Container(
-                            child: Text(
-                          'settings',
-                          style: TextStyle(fontSize: 20),
-                        )),
+                        GestureDetector(onTap: () {
+                          
+                        },
+                          child: Container(
+                              child: Text(
+                            'settings',
+                            style: TextStyle(fontSize: 20),
+                          )),
+                        ),
                       ],
                     )),
                 SizedBox(

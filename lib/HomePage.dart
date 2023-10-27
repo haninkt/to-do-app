@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
   // Load the saved list when the app starts
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {  
     double _calculateAvailableHeight(BuildContext context) {
       final mediaQuery = MediaQuery.of(context);
       return mediaQuery.size.height - mediaQuery.padding.top;

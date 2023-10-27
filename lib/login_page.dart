@@ -2,6 +2,7 @@
 // import 'package:flutter_animated_button/flutter_animated_button.dart';
 import 'package:design/HomePage.dart';
 import 'package:design/provider.dart';
+import 'package:design/signin.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -225,7 +226,7 @@ class LoginPageState extends State<LoginPage> {
                                   style: TextStyle(
                                       fontSize: 15, color: Colors.blue),
                                 ),
-                                onPressed: () {
+                                onPressed: () {Navigator.of(context).push(MaterialPageRoute(builder: (context) => SignUpPage()));
                                   //signup screen
                                 },
                                 style: ButtonStyle(

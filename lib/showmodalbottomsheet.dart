@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -12,7 +14,7 @@ Future<dynamic> ShowModalBottomSheet(BuildContext context) {
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(52), topRight: Radius.circular(52))),
       builder: (BuildContext context) {
-        return Container(
+        return SizedBox(
           height: MediaQuery.of(context).size.height *
               0.90, // 3/4 of the screen height
 
@@ -144,12 +146,12 @@ Future<dynamic> ShowModalBottomSheet(BuildContext context) {
                             )
                           ],
                         ),
-                        Padding(padding: EdgeInsets.only(left: 120)),
-                        new CircularPercentIndicator(
+                        const Padding(padding: EdgeInsets.only(left: 120)),
+                        CircularPercentIndicator(
                           radius: 15.0,
                           lineWidth: 2.0,
                           percent: .75,
-                          progressColor: Color(0xFF60DEC0),
+                          progressColor: const Color(0xFF60DEC0),
                           backgroundColor: Colors.transparent,
                         )
                         // Container(
@@ -224,12 +226,12 @@ Future<dynamic> ShowModalBottomSheet(BuildContext context) {
                             )
                           ],
                         ),
-                        Padding(padding: EdgeInsets.only(left: 120)),
-                        new CircularPercentIndicator(
+                        const Padding(padding: EdgeInsets.only(left: 120)),
+                        CircularPercentIndicator(
                           radius: 15.0,
                           lineWidth: 2.0,
                           percent: .80,
-                          progressColor: Color(0xFF8C8CD8),
+                          progressColor: const Color(0xFF8C8CD8),
                           backgroundColor: Colors.transparent,
                         )
                       ],
@@ -292,12 +294,12 @@ Future<dynamic> ShowModalBottomSheet(BuildContext context) {
                                 )
                               ],
                             ),
-                            Padding(padding: EdgeInsets.only(left: 113)),
-                            new CircularPercentIndicator(
+                            const Padding(padding: EdgeInsets.only(left: 113)),
+                            CircularPercentIndicator(
                               radius: 15.0,
                               lineWidth: 2.0,
                               percent: .35,
-                              progressColor: Color(0xFFFC8648),
+                              progressColor: const Color(0xFFFC8648),
                               backgroundColor: Colors.transparent,
                             )
                             // Container(
@@ -323,7 +325,7 @@ Future<dynamic> ShowModalBottomSheet(BuildContext context) {
                   )
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 0,
               ),
               Container(

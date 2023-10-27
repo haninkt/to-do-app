@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types, non_constant_identifier_names
+
 import 'package:design/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -58,8 +60,8 @@ class providerd with ChangeNotifier {
 
 class ColorProvider with ChangeNotifier {
 
-    Color currentColor = Color(0xff443a49);
-     Color pickerColor = Color(0xff443a49);
+    Color currentColor = const Color(0xff443a49);
+     Color pickerColor = const Color(0xff443a49);
 
   void saveCurrentColor() async {
     final prefs = await SharedPreferences.getInstance();
