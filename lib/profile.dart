@@ -1,8 +1,12 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:design/login_page.dart';
+import 'dart:io';
+
+import 'package:design/login%20&%20signup/login_page.dart';
 import 'package:design/provider.dart';
+import 'package:design/test.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -16,6 +20,8 @@ class ProfilePageState extends State<ProfilePage> {
     super.initState();
     loadLogin();
   }
+  File? galleryFile;
+final picker = ImagePicker();
 
   void removeLogin() async {
     setState(() {
@@ -46,26 +52,26 @@ class ProfilePageState extends State<ProfilePage> {
                     width: 100.0,
                     decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        image: DecorationImage(
-                          image: AssetImage("assets/user pic.jpg"),
-                        )),
+                        ),child: galleryFile == null
+					? const Center(child: Text('Sorry nothing selected!!'))
+					: Center(child: Image.file(galleryFile!),), 
                   ),
                   Positioned(
                     bottom: 0.0,
                     right: 7.0,
                     child: GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context, '/editprofile');
+                        _showPicker(context: context);
                       },
                       child: Container(
                           padding: EdgeInsets.all(1.0),
                           decoration: const BoxDecoration(
                             shape: BoxShape.circle,
-                            color: Colors.red,
+                            color: Color.fromARGB(255, 0, 0, 0),
                           ),
                           child: Icon(
                             Icons.edit,
-                            size: 20,
+                            size: 15,color: Colors.white,
                           )),
                     ),
                   )
@@ -166,7 +172,9 @@ class ProfilePageState extends State<ProfilePage> {
                           width: 80,
                         ),
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                           Navigator.of(context).push(MaterialPageRoute(builder: (context) => neewwww())); 
+                          },
                           child: Container(
                               child: Text(
                             'settings',
@@ -249,4 +257,54 @@ class ProfilePageState extends State<ProfilePage> {
       },
     );
   }
+  
+  void _showPicker({
+	required BuildContext context,
+}) {
+	showModalBottomSheet(
+	context: context,
+	builder: (BuildContext context) {
+		return SafeArea(
+		child: Wrap(
+			children: <Widget>[
+			ListTile(
+				leading: const Icon(Icons.photo_library),
+				title: const Text('Photo Library'),
+				onTap: () {
+				getImage(ImageSource.gallery);
+				Navigator.of(context).pop();
+				},
+			),
+			ListTile(
+				leading: const Icon(Icons.photo_camera),
+				title: const Text('Camera'),
+				onTap: () {
+				getImage(ImageSource.camera);
+				Navigator.of(context).pop();
+				},
+			),
+			],
+		),
+		);
+	},
+	);
+}
+
+Future getImage(
+	ImageSource img,
+) async {
+	final pickedFile = await picker.pickImage(source: img);
+	XFile? xfilePick = pickedFile;
+	setState(
+	() {
+		if (xfilePick != null) {
+		galleryFile = File(pickedFile!.path);
+		} else {
+		ScaffoldMessenger.of(context).showSnackBar(// is this context <<<
+			const SnackBar(content: Text('Nothing is selected')));
+		}
+	},
+	);
+}
+
 }

@@ -1,53 +1,29 @@
-// ignore_for_file: prefer_const_constructors, sort_child_properties_last
-// import 'package:flutter_animated_button/flutter_animated_button.dart';
-import 'package:design/HomePage.dart';
+// ignore_for_file: sort_child_properties_last
+
+import 'package:design/login%20&%20signup/login_page.dart';
 import 'package:design/provider.dart';
-import 'package:design/signin.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-class LoginPage extends StatefulWidget {
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({Key? key}) : super(key: key);
+
   @override
-  LoginPageState createState() => LoginPageState();
+  State<SignUpPage> createState() => _SignUpPageState();
 }
 
-List<String> usernamelist = [];
-List<String> passcodelist = [];
+class _SignUpPageState extends State<SignUpPage> {
+  List<String> username = [];
+  List<String> password = [];
+  List<String> emailid = [];
+  List<String> confirmpass = [];
 
-final TextEditingController username = TextEditingController();
-final password = TextEditingController();
-String name = 'Hanin';
-String pass = 'hanintdg';
+  final TextEditingController signinuser = TextEditingController();
+  final passcode = TextEditingController();
+  final TextEditingController email = TextEditingController();
+  final cnfrmpasscode = TextEditingController();
 
-class LoginPageState extends State<LoginPage> {
-  void initState() {
-    super.initState();
-  }
-
-  bool _obscureText = true;
-
-  void login() {
-    // Check if the username and password are correct
-    if (username.text == name && password.text == pass) {
-      Provider.of<providerd>(context, listen: false)
-          .AddData(username.text, password.text);
-      // Set the _isLoggedIn state to true
-      setState(() {});
-
-      // Navigate to the HomePage() page
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => HomePage()));
-    } else {
-      // Show an error message
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Invalid username or password'),
-        ),
-      );
-    }
-  }
-
+  bool eyehide = true;
   @override
   Widget build(BuildContext context) {
     Provider.of<providerd>(context).SaveData();
@@ -56,7 +32,7 @@ class LoginPageState extends State<LoginPage> {
         children: [
           Positioned(
             child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage('assets/BGCLR.png'),
                   fit: BoxFit.cover,
@@ -72,7 +48,7 @@ class LoginPageState extends State<LoginPage> {
               child: Container(
                 height: 500,
                 width: 400,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage('assets/bagroundclr.png'),
                     fit: BoxFit.cover,
@@ -82,11 +58,12 @@ class LoginPageState extends State<LoginPage> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Container(
-                        margin: EdgeInsets.only(top: 40),
+                        margin: const EdgeInsets.only(top: 20),
+                        height: 80,
                         width: 250,
                         child: Image.asset('assets/To-Do-App-Logo.png')),
-                    SizedBox(
-                      height: 40,
+                    const SizedBox(
+                      height: 10,
                     ),
                     Column(
                       children: [
@@ -94,23 +71,22 @@ class LoginPageState extends State<LoginPage> {
                             width: 270.0,
                             height: 50.0,
                             child: TextField(
-                              controller: username,
-                              style: TextStyle(color: Colors.white),
+                              controller: email,
+                              style: const TextStyle(color: Colors.white),
                               decoration: InputDecoration(
-                                labelText: "username",
+                                labelText: "email",
                                 labelStyle: TextStyle(
                                     fontSize: 14, color: Colors.grey.shade400),
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Color(0x99E0E0E0),
                                   ),
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10),
-                                    borderSide: BorderSide(
-                                      color: const Color.fromARGB(
-                                          255, 255, 255, 255),
+                                    borderSide: const BorderSide(
+                                      color: Color.fromARGB(255, 255, 255, 255),
                                     )),
                                 prefixIcon: const Icon(
                                   Icons.person,
@@ -118,14 +94,42 @@ class LoginPageState extends State<LoginPage> {
                                 ),
                               ),
                             )),
-                        SizedBox(height: 30.0),
+                        const SizedBox(height: 20.0),
                         SizedBox(
                             width: 270.0,
                             height: 50.0,
                             child: TextField(
-                              controller: password,
-                              obscureText: _obscureText,
-                              style: TextStyle(color: Colors.white),
+                              controller: signinuser,
+                              style: const TextStyle(color: Colors.white),
+                              decoration: InputDecoration(
+                                labelText: "username",
+                                labelStyle: TextStyle(
+                                    fontSize: 14, color: Colors.grey.shade400),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: const BorderSide(
+                                    color: Color(0x99E0E0E0),
+                                  ),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: const BorderSide(
+                                      color: Color.fromARGB(255, 255, 255, 255),
+                                    )),
+                                prefixIcon: const Icon(
+                                  Icons.person,
+                                  color: Color(0x99E0E0E0),
+                                ),
+                              ),
+                            )),
+                        const SizedBox(height: 20.0),
+                        SizedBox(
+                            width: 270.0,
+                            height: 50.0,
+                            child: TextField(
+                              controller: passcode,
+                              obscureText: eyehide,
+                              style: const TextStyle(color: Colors.white),
                               decoration: InputDecoration(
                                 labelText: "Password",
                                 labelStyle: TextStyle(
@@ -138,20 +142,19 @@ class LoginPageState extends State<LoginPage> {
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10),
-                                    borderSide: BorderSide(
-                                      color: const Color.fromARGB(
-                                          255, 255, 255, 255),
+                                    borderSide: const BorderSide(
+                                      color: Color.fromARGB(255, 255, 255, 255),
                                     )),
                                 suffixIcon: IconButton(
                                   icon: Icon(
-                                    _obscureText
+                                    eyehide
                                         ? Icons.visibility_off
                                         : Icons.visibility,
-                                    color: Color(0x99E0E0E0),
+                                    color: const Color(0x99E0E0E0),
                                   ),
                                   onPressed: () {
                                     setState(() {
-                                      _obscureText = !_obscureText;
+                                      eyehide = !eyehide;
                                     });
                                   },
                                 ),
@@ -161,56 +164,53 @@ class LoginPageState extends State<LoginPage> {
                                 ),
                               ),
                             )),
-                        Container(
-                          margin: EdgeInsets.only(right: 35),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              TextButton(
-                                child: Text(
-                                  "Forget Password ?",
-                                  style: TextStyle(
-                                      color: Color(0x99E0E0E0),
-                                      fontFamily: "Dubai",
-                                      fontSize: 14),
+                        const SizedBox(height: 20.0),
+                        SizedBox(
+                            width: 270.0,
+                            height: 50.0,
+                            child: TextField(
+                              controller: cnfrmpasscode,
+                              obscureText: eyehide,
+                              style: const TextStyle(color: Colors.white),
+                              decoration: InputDecoration(
+                                labelText: " Confirm Password",
+                                labelStyle: TextStyle(
+                                    fontSize: 14, color: Colors.grey.shade400),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(
+                                    color: Colors.grey.shade300,
+                                  ),
                                 ),
-                                onPressed: () {
-                                  //Get.to(ForgetPassword());
-                                },
-                              )
-                            ],
-                          ),
-                        ),
-                        SizedBox(height: 0.0),
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: const BorderSide(
+                                      color: Color.fromARGB(255, 255, 255, 255),
+                                    )),
+                                
+                                prefixIcon: const Icon(
+                                  Icons.lock,
+                                  color: Color(0x99E0E0E0),
+                                ),
+                              ),
+                            )),
+                        const SizedBox(height: 20.0),
                         SizedBox(
                           width: 270,
-                          // child: AnimatedButton(
-                          //   onPress: login,
-                          //   height: 70,
-                          //   width: 200,
-                          //   text: 'SUBMIT',
-                          //   isReverse: true,
-                          //   selectedTextColor: Colors.black,
-                          //   transitionType:
-                          //       TransitionType.BOTTOM_CENTER_ROUNDER,
-                          //   backgroundColor: Colors.black,
-                          //   borderColor: Colors.white,
-                          //   borderWidth: 1,
-                          // ),
                           child: TextButton(
                             style: ButtonStyle(
                               shape: MaterialStateProperty.all(
                                 RoundedRectangleBorder(
-                                  side: BorderSide(
+                                  side: const BorderSide(
                                     color: Color(0x99E0E0E0),
                                   ),
                                   borderRadius: BorderRadius.circular(5),
                                 ),
                               ),
                             ),
-                            onPressed: login,
-                            child: Text(
-                              'login',
+                            onPressed: () {},
+                            child: const Text(
+                              'sign in',
                               style: TextStyle(
                                   color: Color.fromARGB(197, 253, 252, 252)),
                             ),
@@ -218,20 +218,22 @@ class LoginPageState extends State<LoginPage> {
                         ),
                         Row(
                           children: <Widget>[
-                            const Text('Does not have account?',
+                            const Text('I have account',
                                 style: TextStyle(color: Color(0x99E0E0E0))),
                             TextButton(
                                 child: const Text(
-                                  'Sign in',
+                                  'Login',
                                   style: TextStyle(
                                       fontSize: 15, color: Colors.blue),
                                 ),
                                 onPressed: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => SignUpPage()));
-                                  //signup screen
+                                  Navigator.pushAndRemoveUntil(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => LoginPage()),
+                                      (Route<dynamic> route) => false);
                                 },
-                                style: ButtonStyle(
+                                style: const ButtonStyle(
                                   splashFactory: NoSplash.splashFactory,
                                 ))
                           ],
@@ -248,12 +250,4 @@ class LoginPageState extends State<LoginPage> {
       ),
     );
   }
-}
-
-Future<void> loadLogin() async {
-  final prefs = await SharedPreferences.getInstance();
-  usernamelist = prefs.getStringList('username_value') ?? [];
-  passcodelist = prefs.getStringList('passcode_value') ?? [];
-  print(usernamelist);
-  print(passcodelist);
 }

@@ -1,290 +1,125 @@
-// import 'package:design/tasking.dart';
-// ignore_for_file: unnecessary_null_comparison, prefer_const_constructors, sort_child_properties_last, non_constant_identifier_names, file_names
-import 'package:design/provider.dart';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_colorpicker/flutter_colorpicker.dart';
-import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:vibration/vibration.dart';
+import 'package:image_picker/image_picker.dart';
 
-final taskname = TextEditingController();
-final count = TextEditingController();
-final completed = TextEditingController();
-final catagory = TextEditingController();
+class neewwww extends StatelessWidget {
+const neewwww({super.key});
 
-List<String> tasks = [];
-List<String> counts = [];
-List<String> completes = [];
-// list of images
-List imgList = [
-  Image.asset('assets/fa_paint-brush.png'),
-  Image.asset('assets/healthicons_group-discussion-meeting.png'),
-  Image.asset('assets/carbon_machine-learning-model.png'),
-];
-
-Future<dynamic> ShowDialogue(BuildContext context) async => showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(
-            'Add Task',
-          ),
-          content: StatefulBuilder(
-            builder: (BuildContext context, StateSetter setState) {
-              return SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: Column(
-                  children: [
-                    TextFormField(
-                      controller: taskname,
-                      decoration: InputDecoration(hintText: 'Enter Task Name'),
-                    ),
-                    DropdownButton(
-                      hint: Text('Select'),
-                      items: const [
-                        DropdownMenuItem(
-                          child: Text('Design'),
-                          value: 'design',
-                        ),
-                        DropdownMenuItem(
-                          child: Text('Meeting'),
-                          value: 'meeting',
-                        ),
-                        DropdownMenuItem(
-                          child: Text('Learning'),
-                          value: 'learning',
-                        ),
-                      ],
-                      onChanged: (value) {
-                        setState(() {
-                          catagory.text = value as String;
-                        });
-                      },
-                    ),
-                  ],
-                  mainAxisSize: MainAxisSize.max,
-                ),
-              );
-            },
-          ),
-          actions: [
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text('Cancel'),
-            ),
-            Consumer<providerd>(builder: (context, mypro, child) {
-              return ElevatedButton(
-                onPressed: () {
-                  if (tasks != null) {
-                    mypro.addTask(taskname.text);
-                  }
-
-                  Navigator.of(context).pop();
-                },
-                child: Text('Add'),
-              );
-            })
-          ],
-        );
-      },
-    );
-
-void addTask(String task) async {
-  tasks.add(task);
-  saveTasks();
-  taskname.clear();
+@override
+Widget build(BuildContext context) {
+	return MaterialApp(
+	theme: ThemeData(primaryColor: Colors.green),
+	home: const GalleryAccess(),
+	debugShowCheckedModeBanner: false,
+	);
+}
 }
 
-Future<void> saveTasks() async {
-  final prefs = await SharedPreferences.getInstance();
-  prefs.setStringList('tasks', tasks);
+class GalleryAccess extends StatefulWidget {
+const GalleryAccess({super.key});
+
+@override
+State<GalleryAccess> createState() => _GalleryAccessState();
 }
 
-class MyWidget extends StatefulWidget {
-  const MyWidget({super.key});
+class _GalleryAccessState extends State<GalleryAccess> {
+File? galleryFile;
+final picker = ImagePicker();
+@override
+Widget build(BuildContext context) {
+	//display image selected from gallery
 
-  @override
-  State<MyWidget> createState() => MyWidgetState();
+	return Scaffold(
+	appBar: AppBar(
+		title: const Text('Gallery and Camera Access'),
+		backgroundColor: Colors.green,
+		actions: const [],
+	),
+	body: Builder(
+		builder: (BuildContext context) {
+		return Center(
+			child: Column(
+			mainAxisAlignment: MainAxisAlignment.center,
+			children: [
+				ElevatedButton(
+				style: ButtonStyle(
+					backgroundColor: MaterialStateProperty.all(Colors.green)),
+				child: const Text('Select Image from Gallery and Camera'),
+				onPressed: () {
+					_showPicker(context: context);
+				},
+				),
+				const SizedBox(
+				height: 20,
+				),
+				SizedBox(
+				height: 200.0,
+				width: 300.0,
+				
+				),
+				const Padding(
+				padding: EdgeInsets.symmetric(vertical: 18.0),
+				child: Text(
+					"GFG",
+					textScaleFactor: 3,
+					style: TextStyle(color: Colors.green),
+				),
+				)
+			],
+			),
+		);
+		},
+	),
+	);
 }
 
-class MyWidgetState extends State<MyWidget> {
-  @override
-  Widget build(BuildContext context) {
-    final aaa = Provider.of<providerd>(context);
-
-    return Consumer<providerd>(builder: (context, mypro, chil) {
-      return ListView.builder(
-          itemCount: mypro.tasks.length,
-          itemBuilder: (context, index) {
-            return GestureDetector(
-              onLongPress: () {
-                Vibration.vibrate(duration: 100);
-                showDialog<void>(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: const Text('Confirm Delete',
-                          textAlign: TextAlign.center),
-                      actions: <Widget>[
-                        TextButton(
-                          style: TextButton.styleFrom(
-                            textStyle: Theme.of(context).textTheme.labelLarge,
-                          ),
-                          child: const Text('Cancel'),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                        ),
-                        SizedBox(width: 115),
-                        TextButton(
-                          style: TextButton.styleFrom(
-                            textStyle: Theme.of(context).textTheme.labelLarge,
-                          ),
-                          child: const Text('Confirm'),
-                          onPressed: () {
-                            aaa.removeTask(index);
-                            Navigator.of(context).pop();
-                          },
-                        )
-                      ],
-                    );
-                  },
-                );
-              },
-              child: ListTile(
-                title: Text(tasks[index]),
-                subtitle: Text(' completed'),
-                trailing: Container(
-                  height: 22,
-                  width: 22,
-                  color: Color.fromARGB(255, 255, 156, 63),
-                  child: Container(
-                    margin: EdgeInsets.only(left: 7, top: 3),
-                    child: Text('0'),
-                  ),
-                ),
-                leading: MyIcons(),
-              ),
-            );
-          });
-    });
-  }
+void _showPicker({
+	required BuildContext context,
+}) {
+	showModalBottomSheet(
+	context: context,
+	builder: (BuildContext context) {
+		return SafeArea(
+		child: Wrap(
+			children: <Widget>[
+			ListTile(
+				leading: const Icon(Icons.photo_library),
+				title: const Text('Photo Library'),
+				onTap: () {
+				getImage(ImageSource.gallery);
+				Navigator.of(context).pop();
+				},
+			),
+			ListTile(
+				leading: const Icon(Icons.photo_camera),
+				title: const Text('Camera'),
+				onTap: () {
+				getImage(ImageSource.camera);
+				Navigator.of(context).pop();
+				},
+			),
+			],
+		),
+		);
+	},
+	);
 }
 
-class MyIcons extends StatefulWidget {
-  const MyIcons({super.key});
-
-  @override
-  State<MyIcons> createState() => _MyIconsState();
+Future getImage(
+	ImageSource img,
+) async {
+	final pickedFile = await picker.pickImage(source: img);
+	XFile? xfilePick = pickedFile;
+	setState(
+	() {
+		if (xfilePick != null) {
+		galleryFile = File(pickedFile!.path);
+		} else {
+		ScaffoldMessenger.of(context).showSnackBar(// is this context <<<
+			const SnackBar(content: Text('Nothing is selected')));
+		}
+	},
+	);
 }
-
-class _MyIconsState extends State<MyIcons> {
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onLongPress: () {
-        showDialog(
-          context: context,
-          builder: (ctx) => AlertDialog(
-            title: const Text("choose color"),
-            actions: <Widget>[
-              Row(
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Coloralert(context);
-                    },
-                    child: Container(
-                      height: 50,
-                      width: 90,
-                      color: Color.fromARGB(255, 133, 125, 125),
-                      child: Column(
-                        children: [
-                          Container(
-                              height: 30,
-                              width: 30,
-                              decoration: BoxDecoration(
-                                color: currentColor,
-                                borderRadius: BorderRadius.circular(100),
-                              )),
-                          Text('select color')
-                        ],
-                      ),
-                    ),
-                  )
-                ],
-              ),
-              ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                    setState(() => currentColor = pickerColor);
-                  },
-                  child: Text('ok')),
-            ],
-          ),
-        );
-      },
-      child: Container(
-          height: 50,
-          width: 50,
-          decoration: BoxDecoration(
-              color: currentColor,
-              image: DecorationImage(
-                  image: AssetImage('assets/fa_paint-brush.png')),
-              borderRadius: BorderRadius.all(Radius.circular(5)))),
-    );
-  }
-
-  // create some values
-  Color pickerColor = Color(0xff443a49);
-  Color currentColor = Color(0xff443a49);
-
-// ValueChanged<Color> callback
-  void changeColor(Color color) {
-    setState(() => pickerColor = color);
-  }
-
-  Future<dynamic> Coloralert(BuildContext context) {
-    return showDialog(
-      builder: (context) => AlertDialog(
-        title: const Text('Pick a color!'),
-        content: SingleChildScrollView(
-          // child: ColorPicker(
-          //   pickerColor: pickerColor,
-          //   onColorChanged: changeColor,
-          // ),
-          // Use Material color picker:
-          //
-          // child: MaterialPicker(
-          //   pickerColor: pickerColor,
-          //   onColorChanged: changeColor,
-          //   showLabel: true, // only on portrait mode
-          // ),
-          //
-          // Use Block color picker:
-          //
-          child: BlockPicker(
-            pickerColor: currentColor,
-            onColorChanged: changeColor,
-          ),
-          //
-          // child: MultipleChoiceBlockPicker(
-          //   pickerColors: currentColors,
-          //   onColorsChanged: changeColors,
-          // ),
-        ),
-        actions: <Widget>[
-          ElevatedButton(
-            child: const Text('Got it'),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-        ],
-      ),
-      context: context,
-    );
-  }
 }
